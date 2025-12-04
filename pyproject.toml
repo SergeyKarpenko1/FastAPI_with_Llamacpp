@@ -6,6 +6,8 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.123.7",
     # vllm установлен локально через pip install -e
+    "huggingface-hub>=0.36.0",
     "pydantic>=2.12.5",
+    "transformers>=4.57.3",
     "uvicorn>=0.38.0",
 ]
