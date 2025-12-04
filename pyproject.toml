@@ -1,0 +1,11 @@
+[project]
+name = "fastapi-with-vllm"
+version = "0.1.0"
+description = "FastAPI service with vLLM"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.123.7",
+    # vllm установлен локально через pip install -e
+    "pydantic>=2.12.5",
+    "uvicorn>=0.38.0",
+]
