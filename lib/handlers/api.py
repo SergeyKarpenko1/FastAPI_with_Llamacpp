@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 
 from lib.handlers.schemas import PredictRequest, PredictResponse
+from lib.models.generator import TextGeneratorModel
 
 
 @asynccontextmanager
@@ -19,7 +20,7 @@ async def lifespan(app: FastAPI):
     - при остановке просто печатаем сообщение (ресурсов для закрытия пока нет)
     """
     print("LIFESPAN: запуск приложения, инициализируем модель TextGeneratorModel")
-    app.state.mpdel = TextGeneratorModel()
+    app.state.model = TextGeneratorModel()
 
     # сюда же позже можно добавить инициализацию БД, клиентов и т.д.
     yield
