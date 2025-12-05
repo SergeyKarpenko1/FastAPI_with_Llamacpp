@@ -28,12 +28,8 @@ TEXT_GENERATOR_CONTEXT_LENGTH: int = int(
 )
 
 # Параметры генерации по умолчанию
-TEXT_GENERATOR_MAX_TOKENS: int = int(
-    os.getenv("TEXT_GENERATOR_MAX_TOKENS", "256")
-)
+TEXT_GENERATOR_MAX_TOKENS: int = int(os.getenv("TEXT_GENERATOR_MAX_TOKENS", "256"))
 TEXT_GENERATOR_TEMPERATURE: float = float(
     os.getenv("TEXT_GENERATOR_TEMPERATURE", "0.7")
 )
-TEXT_GENERATOR_TOP_P: float = float(
-    os.getenv("TEXT_GENERATOR_TOP_P", "0.9")
-)
+TEXT_GENERATOR_TOP_P: float = float(os.getenv("TEXT_GENERATOR_TOP_P", "0.9"))

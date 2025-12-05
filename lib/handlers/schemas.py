@@ -10,6 +10,7 @@ class PredictRequest(BaseModel):
     - text: исходный текст для модели (str)
     - save: флаг, нужно ли сохранять результат в БД (bool, по умолчанию False)
     """
+
     id: int
     text: str
     save: bool = False
@@ -24,6 +25,7 @@ class PredictResponse(BaseModel):
     - text: исходный текст из запроса
     - generated_text: результат работы модели
     """
+
     id: int
     text: str
     generated_text: str

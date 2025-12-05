@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from llama_cpp import Llama 
+from llama_cpp import Llama
 
 from lib.constants.models import (
     TEXT_GENERATOR_MODEL_PATH,

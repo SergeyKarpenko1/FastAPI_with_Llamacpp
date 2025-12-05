@@ -24,17 +24,15 @@ async def lifespan(app: FastAPI):
 
     # сюда же позже можно добавить инициализацию БД, клиентов и т.д.
     yield
-    
+
     print("LIFESPAN: приложение остановлено")
     # здесь можно закрывать соединения с БД, клиентов, пулов и т.п.
 
-app = FastAPI(
-    title="Text Generation Service",
-    version="0.1.0",
-    lifespan=lifespan
-)
+
+app = FastAPI(title="Text Generation Service", version="0.1.0", lifespan=lifespan)
 
 # -------------------- Middleware -------------------- #
+
 
 @app.middleware("http")
 async def simple_logger(request: Request, call_next):
@@ -48,10 +46,12 @@ async def simple_logger(request: Request, call_next):
     """
     print(f"[Middleware] Incoming request: {request.method} {request.url}")
     response = await call_next(request)
-    print(f'[Middleware] Response status: {response.status_code}')
+    print(f"[Middleware] Response status: {response.status_code}")
     return response
 
+
 # -------------------- Эндпоинты -------------------- #
+
 
 @app.get("/health")
 async def healthcheck():
@@ -66,6 +66,7 @@ async def healthcheck():
     Возвращает простой JSON со статусом.
     """
     return {"status": "ok"}
+
 
 @app.post("/predict", response_model=PredictResponse)
 async def predict(request_data: PredictRequest):
@@ -105,9 +106,6 @@ async def predict(request_data: PredictRequest):
         id=request_data.id,
         text=request_data.text,
         generated_text=generated_text,
-
     )
 
     return response
-
-
