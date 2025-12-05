@@ -5,3 +5,5 @@
 .DS_Store
 
 /lib/models/weights/
+
+**/__pycache__/
