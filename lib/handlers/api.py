@@ -19,8 +19,8 @@ async def lifespan(app: FastAPI):
     - при старте создаём экземпляр модели и кладём его в app.state
     - при остановке просто печатаем сообщение (ресурсов для закрытия пока нет)
     """
-    print("LIFESPAN: запуск приложения, инициализируем модель TextGeneratorModel")
-    app.state.model = ModelClient()
+    print("LIFESPAN: запуск приложения, инициализируем модель ModelClient")
+    app.state.model_client = ModelClient()
 
     # сюда же позже можно добавить инициализацию БД, клиентов и т.д.
     yield
@@ -89,9 +89,9 @@ async def predict(request_data: PredictRequest):
     - сохранение в БД при request_data.save == True.
     """
 
-    model: ModelClient = app.state.__module__
+    model_client: ModelClient = app.state.model_client
 
-    generated_text = model.predict(request_data.text)
+    generated_text = model_client.generate_text(request_data.text)
 
     # TODO: при save=True сохранять запрос и ответ в БД
     # if request_data.save:
