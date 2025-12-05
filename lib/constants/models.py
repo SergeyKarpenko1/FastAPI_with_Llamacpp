@@ -15,9 +15,11 @@ import os
 #   - AIronMind/meno-tiny-0.1-Q4_K_M-GGUF
 #
 
+
+# Путь до GGUF-модели Meno-Tiny-0.1 (Q4_K_M) внутри lib/models/weights
 TEXT_GENERATOR_MODEL_PATH: str = os.getenv(
     "TEXT_GENERATOR_MODEL_PATH",
-    "./models/meno-tiny-0.1-q4_k_m.gguf",
+    "./lib/models/weights/meno-tiny-0.1-q4_k_m.gguf",
 )
 
 # Контекст. В модельной карточке для Q4_K_M-чекапойнта рекомендуют контекст 2048.  [oai_citation:3‡huggingface.co](https://huggingface.co/itlwas/meno-tiny-0.1-Q4_K_M-GGUF?utm_source=chatgpt.com)
