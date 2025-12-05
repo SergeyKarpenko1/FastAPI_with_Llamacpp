@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class Predictrequest(BaseModel):
+class PredictRequest(BaseModel):
     """
     Входные данные для POST /predict.
 
