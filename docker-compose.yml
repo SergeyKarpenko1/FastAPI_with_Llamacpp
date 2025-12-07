@@ -1,0 +1,21 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile        # основной Dockerfile для FastAPI + LLaMA
+    container_name: fastapi-with-llamacpp
+    ports:
+      - "8000:8000"
+
+  generator:
+    build:
+      context: .                    # ВАЖНО: контекст = корень проекта
+      dockerfile: load_generator/Dockerfile
+    container_name: text-load-generator
+    environment:
+      TARGET_URL: "http://api:8000"
+      CONCURRENCY: "3"
+      INTERVAL_SEC: "2.0"
+      REQUEST_TIMEOUT_SEC: "60"
+    depends_on:
+      - api
