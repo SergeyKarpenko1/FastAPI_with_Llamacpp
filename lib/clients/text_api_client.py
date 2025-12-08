@@ -1,22 +1,19 @@
 from __future__ import annotations
-
 from typing import Any, Dict
-
 import httpx
 
 
-async def call_predict(
-    client: httpx.AsyncClient,
-    *,
-    request_id: int,
-    text: str,
-    save: bool = False,
-) -> Dict[str, Any]:
+class PredictorClient:
     """
-    Вызов POST /predict нашего FastAPI-сервиса.
+    Клиент для вызова POST /predict нашего FastAPI-сервиса.
 
-    Параметры:
-      - client: общий AsyncClient с base_url, созданный снаружи
+    Параметры конструктора:
+      - client: общий AsyncClient с base_url, созданный снаружи.
+
+    Метод:
+      - predict(): отправляет запрос на генерацию текста.
+
+    Параметры predict():
       - request_id: id, который уходит в JSON
       - text: текст, который надо отправить на генерацию
       - save: флаг, сохранять ли в БД (у нас сейчас False)
@@ -24,15 +21,23 @@ async def call_predict(
     Возвращает:
       - словарь, распарсенный из JSON-ответа сервера
     """
-    payload = {
-        "id": request_id,
-        "text": text,
-        "save": save,
-    }
 
-    response = await client.post("/predict", json=payload)
+    def __init__(self, client: httpx.AsyncClient):
+        self._client = client
 
-    # Если что-то пошло не так, выбрасываем исключение
-    response.raise_for_status()
+    async def predict(
+        self,
+        *,
+        request_id: int,
+        text: str,
+        save: bool = False,
+    ) -> Dict[str, Any]:
+        payload = {
+            "id": request_id,
+            "text": text,
+            "save": save,
+        }
 
-    return response.json()
+        response = await self._client.post("/predict", json=payload)
+        response.raise_for_status()
+        return response.json()
