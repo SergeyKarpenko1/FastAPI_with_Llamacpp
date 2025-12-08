@@ -28,7 +28,7 @@ def get_env_float(name: str, default: float) -> float:
         return float(value)
     except ValueError:
         return default
-    
+
 
 # Конфигурация для генератора нагрузочных запросов
 
@@ -36,4 +36,3 @@ TARGET_URL: str = get_env_str("TARGET_URL", "http://api:8000")
 CONCURRENCY: int = get_env_int("CONCURRENCY", 3)
 INTERVAL_SEC: float = get_env_float("INTERVAL_SEC", 2.0)
 REQUEST_TIMEOUT_SEC: float = get_env_float("REQUEST_TIMEOUT_SEC", 60.0)
-
