@@ -1,0 +1,9 @@
+.venv
+
+.env
+
+.DS_Store
+
+/lib/models/weights/
+
+**/__pycache__/
